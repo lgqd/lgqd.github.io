@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        path: lgqd
 
     - name: Checkout Other Repo
       uses: actions/checkout@v3
@@ -18,14 +20,14 @@ jobs:
         token: ${{ secrets.PUSH_TOKEN }}
         repository: lgdesviante/lgdesviante.github.io
         ref: main
-        path: './www'
+        path: www
 
     - name: Push other repo
       run: |
         cd www
         git push origin :gh-pages &>/dev/null || true
         git switch --orphan gh-pages
-        cp -r ../*.html ../*.gif ../*.ico ../*.css ../js ../imgs ../fontes ./
+        cp -r ../lgqd/* .
         git config --local user.name "github-actions[bot]"
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git add .
