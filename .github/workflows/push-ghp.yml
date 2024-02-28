@@ -23,7 +23,7 @@ jobs:
     - name: Push other repo
       run: |
         cd www
-        git push origin :gh-pages
+        git push origin :gh-pages &>/dev/null || true
         git switch --orphan gh-pages
         cp -r ../*.html ../*.gif ../*.ico ../*.css ../js ../imgs ../fontes ./
         git config --local user.name "github-actions[bot]"
